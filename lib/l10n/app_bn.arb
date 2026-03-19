@@ -1,0 +1,51 @@
+{
+
+"appname" : "টাকা ম্যানেজার",
+"bottom_home" : "হোম",
+"bottom_account" : "একাউন্ট",
+"bottom_category" : "ক্যাটাগরি",
+"bottom_reports" : "রিপোর্ট",
+"welcome_text" : "আপনাকে স্বাগতম",
+"total_balance" : "মোট টাকা",
+"total_expense" : "মোট ব্যয়",
+"total_income" : "মোট আয়",
+"recent_transactions" : "সাম্প্রতিক লেনদেন",
+"transactions" : "লেনদেন",
+"see_all" : "সবগুলো দেখুন",
+"trend" : "ট্রেন্ড",
+"account_details" : "অ্যাকাউন্টের বিস্তারিত",
+
+
+"transaction_type" : "লেনদেনের ধরন বেছে নিন",
+"add_income" : "ইনকাম যোগ করুন",
+"add_expense" : "খরচ যোগ করুন",
+"add_amount" : "টাকার পরিমান",
+"add_description" : "টাকার বর্ণনা",
+"date" : "সময় ও তারিখ",
+"account_select" : "অ্যাকাউন্ট",
+"category_select" : "ক্যাটাগরি",
+"save_button" : "সংরক্ষণ করুন",
+
+"add_account" : "একাউন্ট যোগ করুন",
+"update_account" : "একাউন্ট আপডেট করুন",
+"account_name" : "একাউন্টের নাম",
+"your_name" : "আপনার নাম",
+"enter_amount" : "টাকার পরিমাণ",
+"last_digit" : "শেষের চার সংখ্যা",
+"save_account" : "একাউন্ট সংরক্ষণ করুন",
+
+"expense" : "খরচ",
+"income" : "ইনকাম",
+"categoris" : "ক্যাটাগরি",
+"add_category" : "ক্যাটেগরি যোগ করুন",
+"income_add_cat" : "ইনকাম ক্যাটাগরি যোগ করুন",
+"expense_add_cat" : "খরচ ক্যাটাগরি যোগ করুন",
+"category_name" : "ক্যাটাগরির নাম",
+"category_des" : "ক্যাটাগরি ডেসক্রিপশন",
+"save_category" : "সংরক্ষিত করুন",
+
+"profile" : "প্রোফাইল"
+
+
+
+}

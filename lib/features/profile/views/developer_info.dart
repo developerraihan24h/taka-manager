@@ -1,0 +1,122 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class DeveloperInfoPage extends StatelessWidget {
+  const DeveloperInfoPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        title: const Text("Developer Information"),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+
+            // Profile Section
+            Container(
+              padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: const [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage("assets/images/raihanpic.jpg"),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    "Md Abu Raihan",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "Flutter Mobile App Developer",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+
+             SizedBox(height: 10.h),
+
+            // About Section
+            _buildSection(
+              title: "About",
+              content:
+              "Passionate Flutter developer with experience in app development, video editing, and digital marketing. Focused on building modern and user-friendly applications.",
+            ),
+
+            // Skills Section
+            _buildSection(
+              title: "Skills",
+              content:
+              "• Flutter\n• Dart\n• Firebase\n• UI/UX Design\n",
+            ),
+
+            // Contact Section
+            _buildSection(
+              title: "Contact",
+              content:
+              "Email: dev.raihan24h@email.com\nWebsite: topwaysolution.com\nPhone: +8801701060008",
+            ),
+
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSection({required String title, required String content}) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            content,
+            style: const TextStyle(color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+}

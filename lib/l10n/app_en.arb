@@ -1,0 +1,51 @@
+{
+"appname" : "Taka Manager",
+"bottom_home" : "Home",
+"bottom_account" : "Account",
+"bottom_category" : "Category",
+"bottom_reports" : "Reports",
+"welcome_text" : "Welcome Back ",
+"total_balance" : "Total Balance",
+"total_expense" : "Expense",
+"total_income" : "Income",
+"recent_transactions" : "Recent transactions",
+"transactions" : "Transactions",
+"see_all" : "See all",
+"trend" : "Trend",
+"account_details" : "Account Details",
+
+
+"transaction_type" : "Choose Transaction Type",
+"add_income" : "Add Income",
+"add_expense" : "Add Expense",
+"add_amount" : "Amount",
+"add_description" : "Write Something",
+"date" : "Time and date",
+"account_select" : "Account",
+"category_select" : "Category",
+"save_button" : "Save Transaction",
+
+"add_account" : "Add Account",
+"update_account" : "Update Account",
+"account_name" : "Account Name",
+"your_name" : "Your Name",
+"enter_amount" : "Enter Amount",
+"last_digit" : "Last 4 Digit",
+"save_account" : "Add Account",
+
+"expense" : "Expense",
+"income" : "Income",
+"categoris" : "Categoris",
+"add_category" : "Add Category",
+"income_add_cat" : "Income Category Add",
+"expense_add_cat" : "Expense Category Add",
+"category_name" : "Category Name",
+"category_des" : "Category Description",
+"save_category" : "Save Category",
+
+"profile" : "Profile"
+
+
+
+
+}
