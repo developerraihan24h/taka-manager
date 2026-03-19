@@ -7,6 +7,8 @@ import 'package:takamanager/features/profile/viewmodels/settings_provider.dart';
 import 'package:takamanager/features/transaction/viewmodels/transaction_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MultiProvider(
       providers: [

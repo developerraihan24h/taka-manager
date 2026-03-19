@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:takamanager/core/appscolors.dart';
 import 'package:takamanager/features/accounts/viewmodels/account_provider.dart';
 import 'package:takamanager/features/accounts/views/addaccount.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../common/customappbar.dart';
 import '../widgets/accountscard.dart';
 import 'account_details.dart';
 
@@ -31,40 +31,37 @@ class _AccountsPageState extends State<AccountsPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
-
         title: Row(
           children: [
-            Icon(Icons.account_balance, color: AppsColors.primary),
-            const SizedBox(width: 10),
-
+            Icon(Icons.account_balance, color: AppsColors.primary, size: 24.r),
+            SizedBox(width: 10.w),
             Text(
-              AppLocalizations.of(context)!.account_name,
+              AppLocalizations.of(context)!.bottom_account,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontFamily: "bold",
                 color: AppsColors.primary,
               ),
             ),
           ],
         ),
-
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(color: Colors.grey.shade200, height: 1),
+          preferredSize: Size.fromHeight(1.h),
+          child: Container(color: Colors.grey.shade200, height: 1.h),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0).r,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Consumer<AccountProvider>(
               builder: (ctx, provider, child) {
                 final accounts = provider.accountList;
 
                 if (accounts.isEmpty) {
-                  return Center(child: Text("No Account Found"));
+                  return const Expanded(
+                    child: Center(child: Text("No Account Found")),
+                  );
                 }
 
                 return Expanded(
@@ -83,14 +80,11 @@ class _AccountsPageState extends State<AccountsPage> {
                             ),
                           );
                         },
-
                         child: AccountsCard(
                           accountName: account['account_name'],
                           holderName: account['holder_name'],
                           accountNumber: account['account_number'],
-                          balance: account['balance'] is int
-                              ? (account['balance'] as int).toDouble()
-                              : account['balance'],
+                          balance: (account['balance'] as num).toDouble(),
                         ),
                       );
                     },
@@ -101,7 +95,6 @@ class _AccountsPageState extends State<AccountsPage> {
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppsColors.primary,
         onPressed: () {
@@ -109,12 +102,12 @@ class _AccountsPageState extends State<AccountsPage> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Addaccount();
+                return const Addaccount();
               },
             ),
           );
         },
-        child: Icon(Icons.wallet, color: Colors.white),
+        child: const Icon(Icons.wallet, color: Colors.white),
       ),
     );
   }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:takamanager/features/profile/viewmodels/settings_provider.dart';
 
 import '../../../core/appscolors.dart';
 import '../../uihelper.dart';
@@ -17,47 +20,73 @@ class AccountsCard extends StatelessWidget {
     required this.balance,
   });
 
+  Color _getRandomColor() {
+    final List<Color> colors = [
+      const Color(0xFFE3F2FD), // Light Blue
+      const Color(0xFFF1F8E9), // Light Green
+      const Color(0xFFFFF8E1), // Light Amber
+      const Color(0xFFF3E5F5), // Light Purple
+      const Color(0xFFFCE4EC), // Light Pink
+      const Color(0xFFE0F2F1), // Light Teal
+      const Color(0xFFEFEBE9), // Light Brown
+    ];
+    // Use hashcode of accountName to pick a stable "random" color
+    return colors[accountName.hashCode % colors.length];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = Provider.of<SettingsProvider>(context);
+    final currency = settingsProvider.currency;
+    final backgroundColor = _getRandomColor();
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: EdgeInsets.only(bottom: 8.h),
       child: Container(
-        height: 150,
+        height: 150.h,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppsColors.bottomBattonBackground,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: AppsColors.primary, width: 1),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(15.r),
+          border: Border.all(color: AppsColors.primary.withOpacity(0.3), width: 1.w),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 5,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(12.0).r,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               /// Top Section
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      uiHelper.CustomText(
-                        text: accountName,
-                        fontSize: 18,
-                        fontweight: FontWeight.bold,
-                      ),
-                      uiHelper.CustomText(
-                        text: holderName,
-                        fontSize: 16,
-                        fontweight: FontWeight.bold,
-                        color: Colors.black54,
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        uiHelper.CustomText(
+                          text: accountName,
+                          fontSize: 18,
+                          fontweight: FontWeight.bold,
+                        ),
+                        uiHelper.CustomText(
+                          text: holderName,
+                          fontSize: 16,
+                          fontweight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                      ],
+                    ),
                   ),
-
                   Column(
                     children: [
-                      Icon(Icons.account_balance),
+                      Icon(Icons.account_balance, size: 24.r, color: AppsColors.primary),
                       uiHelper.CustomText(
                         text: accountNumber,
                         fontSize: 14,
@@ -68,16 +97,22 @@ class AccountsCard extends StatelessWidget {
                 ],
               ),
 
-              SizedBox(height: 15),
+              const Spacer(),
 
               /// Balance
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   uiHelper.CustomText(
-                    text: balance.toString(),
+                    text: "Current Balance",
+                    fontSize: 12,
+                    color: Colors.black45,
+                  ),
+                  uiHelper.CustomText(
+                    text: "${balance.toStringAsFixed(2)} $currency",
                     fontSize: 24,
                     fontweight: FontWeight.bold,
-                    color: Colors.black54,
+                    color: Colors.black87,
                     fontfamily: "bold",
                   ),
                 ],

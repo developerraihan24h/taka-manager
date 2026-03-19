@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -95,7 +95,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   child: uiHelper.customImage(imgurl: "takamanager.png"),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               SlideTransition(
                 position: _textSlideAnimation,
                 child: uiHelper.CustomText(
