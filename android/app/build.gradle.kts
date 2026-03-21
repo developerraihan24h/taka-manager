@@ -3,7 +3,7 @@ import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    // id("kotlin-android") // Removed Kotlin
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -23,9 +23,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+    // Removed kotlinOptions
 
     defaultConfig {
         applicationId = "com.topwaysolution.takamanager"

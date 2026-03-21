@@ -21,7 +21,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   void shareApp() {
     Share.share(
-      "Check out this amazing app: https://play.google.com/store/apps/details?id=com.yourapp",
+      "Check out this amazing app: https://play.google.com/store/apps/details?id=com.topwaysolution.takamanager",
     );
   }
 
