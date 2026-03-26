@@ -85,7 +85,8 @@ class _HomeState extends State<Home> {
                                 /// INCOME
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       uiHelper.CustomText(
                                         text: AppLocalizations.of(
