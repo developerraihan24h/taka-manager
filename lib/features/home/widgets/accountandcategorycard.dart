@@ -16,40 +16,45 @@ class AccountAndCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
       width: 80.w,
       decoration: BoxDecoration(
         color: isSelected
-            ? AppsColors.primary.withOpacity(0.2) // selected background
-            : AppsColors.bottomBattonBackground,
+            ? AppsColors.primary.withOpacity(0.3) // selected background
+            : (isDark ? Colors.grey.shade900 : AppsColors.bottomBattonBackground),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: isSelected
               ? AppsColors.primary
-              : Colors.grey,
+              : (isDark ? Colors.grey.shade700 : Colors.grey.shade300),
           width: 2,
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(5.r),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 22.r,
+              backgroundColor: isDark ? Colors.grey.shade800 : Colors.white,
+              radius: 18.r,
               child: SizedBox(
-                height: 25.h,
-                width: 25.w,
+                height: 20.h,
+                width: 20.w,
                 child: uiHelper.customImage(imgurl: "taka.png"),
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 5.h),
             Text(
               accountName,
-              maxLines: 2,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: 12.sp,
+                color: isDark ? Colors.white : Colors.black87,
                 fontWeight:
                 isSelected ? FontWeight.bold : FontWeight.normal,
               ),

@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,
@@ -92,7 +92,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: SizedBox(
                   height: 120,
                   width: 120,
-                  child: uiHelper.customImage(imgurl: "takamanager.png"),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: uiHelper.customImage(imgurl: "tkmanager_icon.png"),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -102,6 +105,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   text: "Taka Manager",
                   fontSize: 28,
                   fontweight: FontWeight.bold,
+                  context: context,
                 ),
               ),
             ],

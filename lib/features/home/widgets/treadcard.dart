@@ -18,10 +18,11 @@ class TrendChartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
     final currency = settingsProvider.currency;
+    final isDark = settingsProvider.isDarkMode;
 
     return Card(
       elevation: 0,
-      color: Colors.grey.shade100,
+      color: isDark ? Colors.grey[900] : Colors.grey.shade100,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -36,18 +37,19 @@ class TrendChartCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.trending_up),
+                    Icon(Icons.trending_up, color: isDark ? Colors.white : Colors.black),
                     const SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.trend,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : Colors.black,
                       ),
                     ),
                   ],
                 ),
-                const Icon(Icons.arrow_forward_ios, size: 16),
+                Icon(Icons.arrow_forward_ios, size: 16, color: isDark ? Colors.white : Colors.black),
               ],
             ),
 
@@ -56,8 +58,9 @@ class TrendChartCard extends StatelessWidget {
             /// Total
             Text(
               "Last 30 Days: ${total.toStringAsFixed(2)} $currency",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
+                color: isDark ? Colors.white70 : Colors.black87,
               ),
             ),
 
@@ -70,9 +73,15 @@ class TrendChartCard extends StatelessWidget {
                 LineChartData(
                   minY: -40000,
                   maxY: 60000,
-                  gridData: const FlGridData(
+                  gridData: FlGridData(
                     show: true,
                     drawVerticalLine: false,
+                    getDrawingHorizontalLine: (value) {
+                      return FlLine(
+                        color: isDark ? Colors.white10 : Colors.black12,
+                        strokeWidth: 1,
+                      );
+                    },
                   ),
                   borderData: FlBorderData(show: false),
                   titlesData: FlTitlesData(
@@ -91,7 +100,7 @@ class TrendChartCard extends StatelessWidget {
                         getTitlesWidget: (value, meta) {
                           return Text(
                             "${(value / 1000).toInt()}K",
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 12, color: isDark ? Colors.white70 : Colors.black54),
                           );
                         },
                       ),
@@ -105,7 +114,7 @@ class TrendChartCard extends StatelessWidget {
                         getTitlesWidget: (value, meta) {
                           return Text(
                             value.toInt().toString(),
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 12, color: isDark ? Colors.white70 : Colors.black54),
                           );
                         },
                       ),

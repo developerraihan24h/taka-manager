@@ -62,26 +62,23 @@ class _ReportPageState extends State<ReportPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         centerTitle: false,
         title: Row(
           children: [
-            Icon(Icons.report, color: AppsColors.primary),
+            Icon(Icons.report),
             const SizedBox(width: 10),
             Text(
               AppLocalizations.of(context)!.bottom_reports,
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: "bold",
-                color: AppsColors.primary,
               ),
             ),
           ],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
-          child: Container(color: Colors.grey.shade200, height: 1),
+          child: Container(color: Theme.of(context).dividerColor, height: 1),
         ),
       ),
       body: Column(
@@ -192,6 +189,7 @@ class _ReportPageState extends State<ReportPage> {
                               text: AppLocalizations.of(context)!.recent_transactions,
                               fontSize: 18,
                               fontweight: FontWeight.bold,
+                              context: context,
                             ),
                             TextButton(
                               onPressed: () {},
@@ -199,7 +197,7 @@ class _ReportPageState extends State<ReportPage> {
                                 AppLocalizations.of(context)!.see_all,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: AppsColors.textcolorBlack,
+                                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : AppsColors.textcolorBlack,
                                 ),
                               ),
                             ),
@@ -228,7 +226,7 @@ class _ReportPageState extends State<ReportPage> {
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: Colors.grey.shade200,
+                                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200,
                                     child: const Icon(Icons.wallet),
                                   ),
                                   title: Text(txn['category_name'] ?? ""),

@@ -31,7 +31,7 @@ class DBHelper {
 
     return await openDatabase(
       dbPath,
-      version: 2,
+      version: 3,
       onCreate: (db, version) async {
         await _createTables(db);
       },
@@ -43,7 +43,8 @@ class DBHelper {
               user_name TEXT,
               profile_image_path TEXT,
               currency TEXT,
-              language_code TEXT
+              language_code TEXT,
+              theme_mode TEXT
             )
           ''');
           await db.insert(TABLE_SETTINGS, {
@@ -52,7 +53,10 @@ class DBHelper {
             'profile_image_path': null,
             'currency': '৳',
             'language_code': 'en',
+            'theme_mode': 'light',
           });
+        } else if (oldVersion < 3) {
+          await db.execute('ALTER TABLE $TABLE_SETTINGS ADD COLUMN theme_mode TEXT DEFAULT "light"');
         }
       },
     );
@@ -120,7 +124,8 @@ class DBHelper {
           user_name TEXT,
           profile_image_path TEXT,
           currency TEXT,
-          language_code TEXT
+          language_code TEXT,
+          theme_mode TEXT
         )
       ''');
 
@@ -130,6 +135,7 @@ class DBHelper {
       'profile_image_path': null,
       'currency': '৳',
       'language_code': 'en',
+      'theme_mode': 'light',
     });
   }
 }

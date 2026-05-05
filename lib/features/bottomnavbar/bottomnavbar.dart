@@ -23,14 +23,9 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
-
         selectedItemColor: AppsColors.primary,
-        selectedLabelStyle: TextStyle(color: Colors.black),
-        //unselectedLabelStyle: TextStyle(color: Colors.grey),
-        //unselectedItemColor: Colors.grey,
-        backgroundColor: AppsColors.secondaryBackground,
-
-
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         onTap: (index) {
           setState(() {
             currentIndex = index;

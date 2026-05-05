@@ -37,7 +37,8 @@ class TransactionProvider with ChangeNotifier {
     });
 
     notifyListeners();
-    await getRecentTransactions(); // ⭐ ADD THIS
+    await getRecentTransactions();
+    await loadCurrentMonthTotals();
   }
 
   Future addExpense(
@@ -71,11 +72,64 @@ class TransactionProvider with ChangeNotifier {
 
     notifyListeners();
 
-    await getRecentTransactions(); // ⭐ ADD THIS
-
+    await getRecentTransactions();
+    await loadCurrentMonthTotals();
   }
 
   //================================
+  double currentMonthIncome = 0;
+  double currentMonthExpense = 0;
+  double lastMonthIncome = 0;
+  double lastMonthExpense = 0;
+
+  Future loadCurrentMonthTotals() async {
+    final db = await DBHelper.getInstance.getDB();
+    final now = DateTime.now();
+    
+    // Current Month
+    final month = now.month.toString().padLeft(2, '0');
+    final year = now.year.toString();
+
+    // Last Month
+    final lastMonthDate = DateTime(now.year, now.month - 1);
+    final lMonth = lastMonthDate.month.toString().padLeft(2, '0');
+    final lYear = lastMonthDate.year.toString();
+
+    final currentResult = await db.rawQuery('''
+      SELECT 
+        SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) as income,
+        SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) as expense
+      FROM transactions
+      WHERE strftime('%m', date) = ? AND strftime('%Y', date) = ?
+    ''', [month, year]);
+
+    final lastResult = await db.rawQuery('''
+      SELECT 
+        SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) as income,
+        SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) as expense
+      FROM transactions
+      WHERE strftime('%m', date) = ? AND strftime('%Y', date) = ?
+    ''', [lMonth, lYear]);
+
+    if (currentResult.isNotEmpty) {
+      currentMonthIncome = (currentResult[0]['income'] as num?)?.toDouble() ?? 0;
+      currentMonthExpense = (currentResult[0]['expense'] as num?)?.toDouble() ?? 0;
+    } else {
+      currentMonthIncome = 0;
+      currentMonthExpense = 0;
+    }
+
+    if (lastResult.isNotEmpty) {
+      lastMonthIncome = (lastResult[0]['income'] as num?)?.toDouble() ?? 0;
+      lastMonthExpense = (lastResult[0]['expense'] as num?)?.toDouble() ?? 0;
+    } else {
+      lastMonthIncome = 0;
+      lastMonthExpense = 0;
+    }
+
+    notifyListeners();
+  }
+
   double get totalIncome {
     double total = 0;
     for (var txn in transactionList) {

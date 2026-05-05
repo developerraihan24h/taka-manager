@@ -39,7 +39,6 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
       appBar: AppBar(
         centerTitle: false,
         title: Text(AppLocalizations.of(context)!.account_details),
-        backgroundColor: Colors.white,
         actions: [
           IconButton(
             icon: const Icon(Icons.delete, color: Colors.red),

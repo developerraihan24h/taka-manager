@@ -20,7 +20,10 @@ class AccountsCard extends StatelessWidget {
     required this.balance,
   });
 
-  Color _getRandomColor() {
+  Color _getBackgroundColor(BuildContext context) {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      return const Color(0xFF1E1E1E);
+    }
     final List<Color> colors = [
       const Color(0xFFE3F2FD), // Light Blue
       const Color(0xFFF1F8E9), // Light Green
@@ -38,7 +41,8 @@ class AccountsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
     final currency = settingsProvider.currency;
-    final backgroundColor = _getRandomColor();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = _getBackgroundColor(context);
 
     return Padding(
       padding: EdgeInsets.only(bottom: 8.h),
@@ -51,7 +55,7 @@ class AccountsCard extends StatelessWidget {
           border: Border.all(color: AppsColors.primary.withOpacity(0.3), width: 1.w),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withOpacity(0.1),
               blurRadius: 5,
               offset: const Offset(0, 2),
             ),
@@ -74,12 +78,14 @@ class AccountsCard extends StatelessWidget {
                           text: accountName,
                           fontSize: 18,
                           fontweight: FontWeight.bold,
+                          context: context,
                         ),
                         uiHelper.CustomText(
                           text: holderName,
                           fontSize: 16,
                           fontweight: FontWeight.bold,
-                          color: Colors.black54,
+                          color: isDark ? Colors.white70 : Colors.black54,
+                          context: context,
                         ),
                       ],
                     ),
@@ -91,6 +97,7 @@ class AccountsCard extends StatelessWidget {
                         text: accountNumber,
                         fontSize: 14,
                         fontweight: FontWeight.bold,
+                        context: context,
                       ),
                     ],
                   ),
@@ -106,14 +113,16 @@ class AccountsCard extends StatelessWidget {
                   uiHelper.CustomText(
                     text: "Current Balance",
                     fontSize: 12,
-                    color: Colors.black45,
+                    color: isDark ? Colors.white54 : Colors.black45,
+                    context: context,
                   ),
                   uiHelper.CustomText(
                     text: "${balance.toStringAsFixed(2)} $currency",
                     fontSize: 24,
                     fontweight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: isDark ? Colors.white : Colors.black87,
                     fontfamily: "bold",
+                    context: context,
                   ),
                 ],
               ),

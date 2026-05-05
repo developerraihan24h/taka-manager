@@ -14,7 +14,6 @@
 "trend" : "Trend",
 "account_details" : "Account Details",
 
-
 "transaction_type" : "Choose Transaction Type",
 "add_income" : "Add Income",
 "add_expense" : "Add Expense",
@@ -43,7 +42,10 @@
 "category_des" : "Category Description",
 "save_category" : "Save Category",
 
-"profile" : "Profile"
+"profile" : "Profile",
+"this_month": "This Month",
+"last_month_inocme": "Last Month Income",
+"last_month_expense": "Last Month Expense"
 
 
 

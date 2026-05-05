@@ -29,26 +29,26 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final secondaryBg = isDark ? Colors.grey.shade800 : AppsColors.secondaryBackground;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
         title: Row(
           children: [
-            Text(
-              AppLocalizations.of(context)!.profile,
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: "bold",
-                color: AppsColors.primary,
-              ),
+            uiHelper.CustomText(
+              text: AppLocalizations.of(context)!.profile,
+              fontSize: 20,
+              fontfamily: "bold",
+              context: context,
             ),
           ],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
-          child: Container(color: Colors.grey.shade200, height: 1),
+          child: Container(color: Theme.of(context).dividerColor, height: 1),
         ),
       ),
       body: Center(
@@ -71,6 +71,7 @@ class _ProfileState extends State<Profile> {
                 text: settingsProvider.userName,
                 fontSize: 20,
                 fontweight: FontWeight.bold,
+                context: context,
               ),
               const SizedBox(height: 20),
               GestureDetector(
@@ -82,7 +83,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   );
                 },
-                child: topRadiusContainer(Icons.edit, "Edit Profile"),
+                child: topRadiusContainer(Icons.edit, "Edit Profile", secondaryBg),
               ),
               const SizedBox(height: 5),
               const SizedBox(height: 5),
@@ -97,14 +98,14 @@ class _ProfileState extends State<Profile> {
                     ),
                   );
                 },
-                child: plainContainer(Icons.info_outline, "Privacy Policy"),
+                child: plainContainer(Icons.info_outline, "Privacy Policy", secondaryBg),
               ),
               const SizedBox(height: 5),
               InkWell(
                 onTap: () {
                   shareApp();
                 },
-                child: plainContainer(Icons.share, "Share App"),
+                child: plainContainer(Icons.share, "Share App", secondaryBg),
               ),
               const SizedBox(height: 5),
               InkWell(
@@ -119,10 +120,11 @@ class _ProfileState extends State<Profile> {
                 child: plainContainer(
                   Icons.person_outline,
                   "Developer Information",
+                  secondaryBg,
                 ),
               ),
               const SizedBox(height: 5),
-              bottomRadiusContainer(Icons.settings, "Setting"),
+              bottomRadiusContainer(Icons.settings, "Setting", secondaryBg),
             ],
           ),
         ),
@@ -130,12 +132,12 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget topRadiusContainer(IconData icon, String btText) {
+  Widget topRadiusContainer(IconData icon, String btText, Color bgColor) {
     return Container(
       height: 40,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppsColors.secondaryBackground,
+        color: bgColor,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
@@ -151,7 +153,7 @@ class _ProfileState extends State<Profile> {
               text: btText,
               fontSize: 16,
               fontweight: FontWeight.bold,
-              color: AppsColors.primary,
+              context: context,
             ),
           ],
         ),
@@ -159,11 +161,11 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget plainContainer(IconData icon, String btText) {
+  Widget plainContainer(IconData icon, String btText, Color bgColor) {
     return Container(
       height: 40,
       width: double.infinity,
-      decoration: BoxDecoration(color: AppsColors.secondaryBackground),
+      decoration: BoxDecoration(color: bgColor),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -174,7 +176,7 @@ class _ProfileState extends State<Profile> {
               text: btText,
               fontSize: 16,
               fontweight: FontWeight.bold,
-              color: AppsColors.primary,
+              context: context,
             ),
           ],
         ),
@@ -182,12 +184,12 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget bottomRadiusContainer(IconData icon, String btText) {
+  Widget bottomRadiusContainer(IconData icon, String btText, Color bgColor) {
     return Container(
       height: 40,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppsColors.secondaryBackground,
+        color: bgColor,
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(10),
           bottomRight: Radius.circular(10),
@@ -203,7 +205,7 @@ class _ProfileState extends State<Profile> {
               text: btText,
               fontSize: 16,
               fontweight: FontWeight.bold,
-              color: AppsColors.primary,
+              context: context,
             ),
           ],
         ),

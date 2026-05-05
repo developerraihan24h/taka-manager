@@ -15,7 +15,6 @@
 "trend" : "ট্রেন্ড",
 "account_details" : "অ্যাকাউন্টের বিস্তারিত",
 
-
 "transaction_type" : "লেনদেনের ধরন বেছে নিন",
 "add_income" : "ইনকাম যোগ করুন",
 "add_expense" : "খরচ যোগ করুন",
@@ -44,7 +43,10 @@
 "category_des" : "ক্যাটাগরি ডেসক্রিপশন",
 "save_category" : "সংরক্ষিত করুন",
 
-"profile" : "প্রোফাইল"
+"profile" : "প্রোফাইল",
+"this_month": "এই মাসে",
+"last_month_inocme": "আগের মাসের আয়",
+"last_month_expense": "আগের মাসের খরচ"
 
 
 

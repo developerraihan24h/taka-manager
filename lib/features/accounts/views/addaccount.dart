@@ -45,12 +45,12 @@ class _AddaccountState extends State<Addaccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 5,
         title: uiHelper.CustomText(
           text: isEdit ? AppLocalizations.of(context)!.update_account : AppLocalizations.of(context)!.add_account,
           fontSize: 24,
           fontweight: FontWeight.bold,
+          context: context,
         ),
       ),
       body: Padding(
@@ -65,6 +65,7 @@ class _AddaccountState extends State<Addaccount> {
               labelText: AppLocalizations.of(context)!.account_name,
               tohide: false,
               textinputtype: TextInputType.text,
+              context: context,
             ),
 
             SizedBox(height: 10),
@@ -75,6 +76,7 @@ class _AddaccountState extends State<Addaccount> {
               labelText: AppLocalizations.of(context)!.your_name,
               tohide: false,
               textinputtype: TextInputType.text,
+              context: context,
             ),
 
             SizedBox(height: 10),
@@ -88,6 +90,7 @@ class _AddaccountState extends State<Addaccount> {
                     labelText: AppLocalizations.of(context)!.enter_amount,
                     tohide: false,
                     textinputtype: TextInputType.number,
+                    context: context,
                   ),
                 ),
                 Expanded(
@@ -97,6 +100,7 @@ class _AddaccountState extends State<Addaccount> {
                     labelText: AppLocalizations.of(context)!.last_digit,
                     tohide: false,
                     textinputtype: TextInputType.number,
+                    context: context,
                   ),
                 ),
               ],

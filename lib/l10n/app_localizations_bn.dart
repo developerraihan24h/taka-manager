@@ -127,4 +127,13 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get profile => 'প্রোফাইল';
+
+  @override
+  String get this_month => 'এই মাসে';
+
+  @override
+  String get last_month_inocme => 'আগের মাসের আয়';
+
+  @override
+  String get last_month_expense => 'আগের মাসের খরচ';
 }

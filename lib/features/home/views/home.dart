@@ -34,6 +34,10 @@ class _HomeState extends State<Home> {
     Future.microtask(() {
       context.read<TransactionProvider>().getRecentTransactions();
     });
+
+    Future.microtask(() {
+      context.read<TransactionProvider>().loadCurrentMonthTotals();
+    });
   }
 
   @override
@@ -50,10 +54,13 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Consumer2<AccountProvider, TransactionProvider>(
-                builder: (context, accountProvider, transactionProvider, child) {
+                builder:
+                    (context, accountProvider, transactionProvider, child) {
                   double totalBalance = accountProvider.totalBalance;
-                  double totalIncome = transactionProvider.totalIncome;
-                  double totalExpense = transactionProvider.totalExpense;
+                  double totalIncome = transactionProvider.currentMonthIncome;
+                  double totalExpense = transactionProvider.currentMonthExpense;
+                  double lastMonthIncome = transactionProvider.lastMonthIncome;
+                  double lastMonthExpense = transactionProvider.lastMonthExpense;
 
                   return Card(
                     color: AppsColors.primary,
@@ -79,7 +86,19 @@ class _HomeState extends State<Home> {
                               fontweight: FontWeight.bold,
                               color: Colors.white,
                             ),
-                            SizedBox(height: 30.h),
+                            SizedBox(height: 10.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                uiHelper.CustomText(
+                                    text: AppLocalizations.of(context)!
+                                        .this_month,
+                                    fontSize: 18.sp,
+                                    fontweight: FontWeight.bold,
+                                    color: Colors.white),
+                              ],
+                            ),
+                            const Divider(color: Colors.white),
                             Row(
                               children: [
                                 /// INCOME
@@ -102,6 +121,12 @@ class _HomeState extends State<Home> {
                                         fontweight: FontWeight.bold,
                                         color: Colors.greenAccent,
                                       ),
+                                      uiHelper.CustomText(
+                                        text:
+                                            "${AppLocalizations.of(context)!.last_month_inocme} ${lastMonthIncome.toStringAsFixed(2)} $currency",
+                                        fontSize: 12.sp,
+                                        color: Colors.white,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -114,7 +139,8 @@ class _HomeState extends State<Home> {
                                       uiHelper.CustomText(
                                         text: AppLocalizations.of(
                                           context,
-                                        )!.total_expense,
+                                        )!
+                                            .total_expense,
                                         fontSize: 16.sp,
                                         color: Colors.white,
                                       ),
@@ -125,6 +151,13 @@ class _HomeState extends State<Home> {
                                         fontweight: FontWeight.bold,
                                         color: Colors.redAccent,
                                       ),
+                                      uiHelper.CustomText(
+                                        text:
+                                            "${AppLocalizations.of(context)!.last_month_expense} ${lastMonthExpense.toStringAsFixed(2)} $currency",
+                                        fontSize: 12.sp,
+                                        color: Colors.white,
+                                      ),
+
                                     ],
                                   ),
                                 ),
@@ -156,6 +189,7 @@ class _HomeState extends State<Home> {
                       text: AppLocalizations.of(context)!.recent_transactions,
                       fontSize: 18.sp,
                       fontweight: FontWeight.bold,
+                      context: context,
                     ),
                     TextButton(
                       onPressed: () {
@@ -170,7 +204,7 @@ class _HomeState extends State<Home> {
                         AppLocalizations.of(context)!.see_all,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: AppsColors.textcolorBlack,
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
                         ),
                       ),
                     ),
@@ -203,9 +237,17 @@ class _HomeState extends State<Home> {
                       return Column(
                         children: [
                           ListTile(
-                            title: Text(txn['category_name'] ?? ""),
+                            title: Text(
+                              txn['category_name'] ?? "",
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyLarge?.color,
+                              ),
+                            ),
                             subtitle: Text(
                               "$formattedDate • $formattedTime • ${txn['account_name']}",
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.7),
+                              ),
                             ),
                             trailing: Text(
                               "${txn['amount']} $currency",
@@ -217,10 +259,10 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-                          const Divider(
+                          Divider(
                             height: 1,
                             thickness: 1,
-                            color: Colors.black12,
+                            color: Theme.of(context).dividerColor,
                           ),
                         ],
                       );
@@ -239,7 +281,7 @@ class _HomeState extends State<Home> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).dialogBackgroundColor,
                 title: Text(AppLocalizations.of(context)!.transaction_type),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,

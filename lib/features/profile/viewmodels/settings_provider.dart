@@ -8,6 +8,7 @@ class SettingsProvider extends ChangeNotifier {
   String? _profileImagePath;
   bool _isFirstTime = true;
   bool _isLoading = true;
+  ThemeMode _themeMode = ThemeMode.light;
 
   Locale get locale => _locale;
   String get currency => _currency;
@@ -15,6 +16,8 @@ class SettingsProvider extends ChangeNotifier {
   String? get profileImagePath => _profileImagePath;
   bool get isFirstTime => _isFirstTime;
   bool get isLoading => _isLoading;
+  ThemeMode get themeMode => _themeMode;
+  bool get isDarkMode => _themeMode == ThemeMode.dark;
 
   SettingsProvider() {
     _loadSettings();
@@ -30,6 +33,7 @@ class SettingsProvider extends ChangeNotifier {
       _profileImagePath = data['profile_image_path'];
       _currency = data['currency'] ?? '৳';
       _locale = Locale(data['language_code'] ?? 'en');
+      _themeMode = data['theme_mode'] == 'dark' ? ThemeMode.dark : ThemeMode.light;
       _isFirstTime = _userName.isEmpty;
     }
     _isLoading = false;
@@ -44,6 +48,12 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> setCurrency(String currency) async {
     _currency = currency;
+    notifyListeners();
+    await _saveSettings();
+  }
+
+  Future<void> toggleTheme(bool isDark) async {
+    _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
     await _saveSettings();
   }
@@ -65,6 +75,7 @@ class SettingsProvider extends ChangeNotifier {
         'profile_image_path': _profileImagePath,
         'currency': _currency,
         'language_code': _locale.languageCode,
+        'theme_mode': _themeMode == ThemeMode.dark ? 'dark' : 'light',
       },
       where: "id = ?",
       whereArgs: [1],

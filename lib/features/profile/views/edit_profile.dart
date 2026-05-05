@@ -67,11 +67,11 @@ class _EditProfileState extends State<EditProfile> {
                 onTap: _pickImage,
                 child: CircleAvatar(
                   radius: 50.r,
-                  backgroundColor: Colors.grey[300],
+                  backgroundColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey[800] : Colors.grey[300],
                   backgroundImage: _image != null ? FileImage(_image!) : null,
                   child: _image == null
                       ? Icon(Icons.camera_alt,
-                          size: 40.r, color: Colors.white)
+                          size: 40.r, color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.white)
                       : null,
                 ),
               ),
@@ -81,6 +81,7 @@ class _EditProfileState extends State<EditProfile> {
                 text: "Enter your name",
                 tohide: false,
                 textinputtype: TextInputType.text,
+                context: context,
               ),
               SizedBox(height: 20.h),
 

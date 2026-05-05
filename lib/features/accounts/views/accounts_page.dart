@@ -28,26 +28,23 @@ class _AccountsPageState extends State<AccountsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         centerTitle: false,
         title: Row(
           children: [
-            Icon(Icons.account_balance, color: AppsColors.primary, size: 24.r),
+            Icon(Icons.account_balance, size: 24.r),
             SizedBox(width: 10.w),
             Text(
               AppLocalizations.of(context)!.bottom_account,
               style: TextStyle(
                 fontSize: 20.sp,
                 fontFamily: "bold",
-                color: AppsColors.primary,
               ),
             ),
           ],
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.h),
-          child: Container(color: Colors.grey.shade200, height: 1.h),
+          child: Container(color: Theme.of(context).dividerColor, height: 1.h),
         ),
       ),
       body: Padding(
@@ -107,7 +104,7 @@ class _AccountsPageState extends State<AccountsPage> {
             ),
           );
         },
-        child: const Icon(Icons.wallet, color: Colors.white),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

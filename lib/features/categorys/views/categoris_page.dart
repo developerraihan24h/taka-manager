@@ -31,13 +31,11 @@ class _CategorisPageState extends State<CategorisPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
           centerTitle: false,
 
           title: Row(
             children: [
-              Icon(Icons.category, color: AppsColors.primary),
+              Icon(Icons.category),
               const SizedBox(width: 10),
 
               Text(
@@ -45,7 +43,6 @@ class _CategorisPageState extends State<CategorisPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: "bold",
-                  color: AppsColors.primary,
                 ),
               ),
             ],
@@ -53,7 +50,7 @@ class _CategorisPageState extends State<CategorisPage> {
 
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1),
-            child: Container(color: Colors.grey.shade200, height: 1),
+            child: Container(color: Theme.of(context).dividerColor, height: 1),
           ),
         ),
         body: Column(
@@ -64,17 +61,17 @@ class _CategorisPageState extends State<CategorisPage> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TabBar(
                 dividerColor: Colors.transparent, // ✅ removes top line
                 indicator: BoxDecoration(
-                  color: const Color(0xff2E5F77),
+                  color: AppsColors.primary,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 labelColor: Colors.white,
-                unselectedLabelColor: Colors.black54,
+                unselectedLabelColor: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
                   Tab(text: AppLocalizations.of(context)!.expense),
@@ -203,7 +200,6 @@ class _CategorisPageState extends State<CategorisPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Colors.white,
           title: const Text("Delete Category"),
           content: const Text("Are you sure you want to delete this category?"),
           actions: [

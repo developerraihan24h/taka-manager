@@ -27,14 +27,17 @@ class _AddExpenseState extends State<AddExpense> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final secondaryBg = isDark ? Colors.grey.shade800 : AppsColors.secondaryBackground;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         centerTitle: false,
         title: uiHelper.CustomText(
           text: AppLocalizations.of(context)!.add_expense,
           fontSize: 20,
           fontweight: FontWeight.bold,
+          context: context,
         ),
       ),
 
@@ -48,34 +51,38 @@ class _AddExpenseState extends State<AddExpense> {
                   text: AppLocalizations.of(context)!.add_amount,
                   fontSize: 16,
                   fontfamily: "bold",
+                  context: context,
                 ),
 
                 ///Amount===========================
-                SizedBox(
+                Container(
                   width: double.infinity,
-                  child: Center(
-                    child: TextField(
-                      controller: AmountController,
-                      textAlign: TextAlign.center, // পুরো text center
-                      keyboardType: TextInputType.number,
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      decoration: InputDecoration(
-                        prefixStyle: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        hintText: "0",
-                        border: InputBorder.none,
-                      ),
+                  decoration: BoxDecoration(
+                    color: secondaryBg,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextField(
+                    controller: AmountController,
+                    textAlign: TextAlign.center, // পুরো text center
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? Colors.white : AppsColors.primary,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "0",
+                      hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.grey),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
                     ),
                   ),
                 ),
 
+                const SizedBox(height: 10),
+
                 ///Description===========================
-                Description(),
+                Description(secondaryBg),
 
                 SizedBox(height: 4),
 
@@ -86,7 +93,7 @@ class _AddExpenseState extends State<AddExpense> {
                     height: 50,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: AppsColors.secondaryBackground,
+                      color: secondaryBg,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
@@ -100,6 +107,7 @@ class _AddExpenseState extends State<AddExpense> {
                             text: AppLocalizations.of(context)!.date,
                             fontSize: 16,
                             fontweight: FontWeight.bold,
+                            context: context,
                           ),
 
                           Spacer(),
@@ -109,6 +117,7 @@ class _AddExpenseState extends State<AddExpense> {
                             "${selectedDateTime.day}/${selectedDateTime.month}/${selectedDateTime.year}, "
                                 "${TimeOfDay.fromDateTime(selectedDateTime).format(context)}",
                             fontSize: 14,
+                            context: context,
                           ),
                         ],
                       ),
@@ -123,7 +132,7 @@ class _AddExpenseState extends State<AddExpense> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: AppsColors.secondaryBackground,
+                        color: secondaryBg,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Column(
@@ -158,6 +167,7 @@ class _AddExpenseState extends State<AddExpense> {
                                       text: AppLocalizations.of(context)!.account_select,
                                       fontSize: 16,
                                       fontweight: FontWeight.bold,
+                                      context: context,
                                     ),
 
                                     const Spacer(),
@@ -165,6 +175,7 @@ class _AddExpenseState extends State<AddExpense> {
                                     uiHelper.CustomText(
                                       text: selectedAccountName,
                                       fontSize: 14,
+                                      context: context,
                                     ),
                                   ],
                                 );
@@ -227,7 +238,7 @@ class _AddExpenseState extends State<AddExpense> {
                 ///Seleted Category===========================
                 Container(
                   decoration: BoxDecoration(
-                    color: AppsColors.secondaryBackground,
+                    color: secondaryBg,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Consumer<CategoryProvider>(
@@ -247,6 +258,7 @@ class _AddExpenseState extends State<AddExpense> {
                                   text:AppLocalizations.of(context)!.category_select,
                                   fontSize: 16,
                                   fontweight: FontWeight.bold,
+                                  context: context,
                                 ),
 
                                 const Spacer(),
@@ -260,6 +272,7 @@ class _AddExpenseState extends State<AddExpense> {
                                   )
                                       .categoryName,
                                   fontSize: 14,
+                                  context: context,
                                 ),
                               ],
                             ),
@@ -354,12 +367,12 @@ class _AddExpenseState extends State<AddExpense> {
     );
   }
 
-  Container Description() {
+  Container Description(Color secondaryBg) {
     return Container(
       height: 50,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppsColors.secondaryBackground,
+        color: secondaryBg,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Padding(
@@ -374,6 +387,7 @@ class _AddExpenseState extends State<AddExpense> {
                 text:AppLocalizations.of(context)!.add_description,
                 tohide: false,
                 textinputtype: TextInputType.text,
+                context: context,
               ),
             ),
           ],

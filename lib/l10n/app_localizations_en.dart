@@ -127,4 +127,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get this_month => 'This Month';
+
+  @override
+  String get last_month_inocme => 'Last Month Income';
+
+  @override
+  String get last_month_expense => 'Last Month Expense';
 }

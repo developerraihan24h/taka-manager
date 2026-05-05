@@ -45,8 +45,38 @@ class _TakaManagerState extends State<TakaManager> {
         locale: settingsProvider.locale,
         home: const SplashScreen(),
         debugShowCheckedModeBanner: false,
+        themeMode: settingsProvider.themeMode,
         theme: ThemeData(
+          brightness: Brightness.light,
           scaffoldBackgroundColor: AppsColors.backgroundColor,
+          primaryColor: AppsColors.primary,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: AppsColors.backgroundColor,
+            elevation: 0,
+            iconTheme: IconThemeData(color: AppsColors.primary),
+            titleTextStyle: TextStyle(color: AppsColors.primary, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.white,
+            selectedItemColor: AppsColors.primary,
+            unselectedItemColor: Colors.grey,
+          ),
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: const Color(0xFF121212),
+          primaryColor: AppsColors.primary,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF121212),
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.white),
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Color(0xFF1E1E1E),
+            selectedItemColor: AppsColors.primary,
+            unselectedItemColor: Colors.grey,
+          ),
         ),
       ),
     );

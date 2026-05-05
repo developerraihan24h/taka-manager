@@ -6,8 +6,9 @@ class DeveloperInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         title: const Text("Developer Information"),
         centerTitle: true,
@@ -23,7 +24,7 @@ class DeveloperInfoPage extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDark ? Colors.grey[850] : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
@@ -33,23 +34,24 @@ class DeveloperInfoPage extends StatelessWidget {
                 ],
               ),
               child: Column(
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage("assets/images/raihanpic.jpg"),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text(
                     "Md Abu Raihan",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     "Flutter Mobile App Developer",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: isDark ? Colors.white70 : Colors.grey),
                   ),
                 ],
               ),
@@ -59,6 +61,7 @@ class DeveloperInfoPage extends StatelessWidget {
 
             // About Section
             _buildSection(
+              context,
               title: "About",
               content:
               "Passionate Flutter developer with experience in app development, video editing, and digital marketing. Focused on building modern and user-friendly applications.",
@@ -66,6 +69,7 @@ class DeveloperInfoPage extends StatelessWidget {
 
             // Skills Section
             _buildSection(
+              context,
               title: "Skills",
               content:
               "• Flutter\n• Dart\n• Firebase\n• UI/UX Design\n",
@@ -73,6 +77,7 @@ class DeveloperInfoPage extends StatelessWidget {
 
             // Contact Section
             _buildSection(
+              context,
               title: "Contact",
               content:
               "Email: dev.raihan24h@email.com\nWebsite: topwaysolution.com\nPhone: +8801701060008",
@@ -85,13 +90,15 @@ class DeveloperInfoPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSection({required String title, required String content}) {
+  Widget _buildSection(BuildContext context, {required String title, required String content}) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? Colors.grey[850] : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -105,15 +112,16 @@ class DeveloperInfoPage extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
             ),
           ),
           const SizedBox(height: 10),
           Text(
             content,
-            style: const TextStyle(color: Colors.grey),
+            style: TextStyle(color: isDark ? Colors.white70 : Colors.grey),
           ),
         ],
       ),

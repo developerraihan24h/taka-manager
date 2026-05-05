@@ -10,12 +10,18 @@ class uiHelper {
     Color? color,
     FontWeight? fontweight,
     String? fontfamily,
+    BuildContext? context,
   }) {
+    Color? textColor = color;
+    if (context != null && color == null) {
+      final theme = Theme.of(context);
+      textColor = theme.textTheme.bodyLarge?.color ?? theme.colorScheme.onSurface;
+    }
     return Text(
       text,
       style: TextStyle(
         fontSize: fontSize.sp,
-        color: color ?? Colors.black,
+        color: textColor ?? Colors.black,
         fontWeight: fontweight,
         fontFamily: fontfamily,
       ),
@@ -28,12 +34,15 @@ class uiHelper {
     required String text,
     required bool tohide,
     required TextInputType textinputtype,
+    BuildContext? context,
   }) {
+    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: 50.h,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppsColors.secondaryBackground,
+        color: isDark ? Colors.grey.shade800 : AppsColors.secondaryBackground,
         borderRadius: BorderRadius.circular(5.r),
       ),
       child: Padding(
@@ -42,13 +51,16 @@ class uiHelper {
           controller: controller,
           obscureText: tohide,
           keyboardType: textinputtype,
-          style: TextStyle(fontSize: 16.sp),
+          style: TextStyle(
+            fontSize: 16.sp,
+            color: isDark ? Colors.white : Colors.black,
+          ),
           decoration: InputDecoration(
             hintText: text,
             hintStyle: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.normal,
-              color: AppsColors.textcolorBlack,
+              color: isDark ? Colors.white70 : AppsColors.textcolorBlack,
             ),
             border: InputBorder.none,
           ),
@@ -99,23 +111,34 @@ class uiHelper {
     String? labelText,
     required bool tohide,
     required TextInputType textinputtype,
+    BuildContext? context,
   }) {
+    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+    Color? fillColor = isDark ? Colors.grey.shade800 : AppsColors.secondaryBackground;
+
     return Padding(
       padding: EdgeInsets.only(left: 10.w),
       child: TextField(
         controller: controller,
         obscureText: tohide,
         keyboardType: textinputtype,
-        style: TextStyle(fontSize: 16.sp),
+        style: TextStyle(
+          fontSize: 16.sp,
+          color: isDark ? Colors.white : Colors.black,
+        ),
         decoration: InputDecoration(
           hintText: text,
           labelText: labelText,
+          filled: true,
+          fillColor: fillColor,
           labelStyle: TextStyle(fontSize: 16.sp, color: AppsColors.primary),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11.r),
+            borderSide: const BorderSide(color: AppsColors.primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11.r),
+            borderSide: BorderSide(color: isDark ? Colors.grey.shade700 : Colors.grey.shade400),
           ),
         ),
       ),

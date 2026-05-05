@@ -17,9 +17,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
+    final theme = Theme.of(context);
+    final isDark = settingsProvider.isDarkMode;
 
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       elevation: 0,
       centerTitle: false,
       title: Row(
@@ -29,9 +31,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 40,
             decoration: BoxDecoration(
               color: AppsColors.primary.withOpacity(.1),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
-            child: uiHelper.customImage(imgurl: "takamanager.png"),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: uiHelper.customImage(imgurl: "tkmanager_icon.png"),
+            ),
           ),
           const SizedBox(width: 10),
           Text(
@@ -45,6 +50,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
+        Transform.scale(
+          scale: 0.8,
+          child: Switch(
+            value: isDark,
+            onChanged: (value) {
+              settingsProvider.toggleTheme(value);
+            },
+            activeColor: isDark ? Colors.black : Colors.white,
+            activeTrackColor: isDark ? Colors.white : Colors.black,
+            inactiveTrackColor: isDark ? Colors.white : Colors.black,
+            inactiveThumbColor: isDark ? Colors.black : Colors.white,
+          ),
+        ),
         GestureDetector(
           onTap: () {
             Navigator.push(
@@ -55,7 +73,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 40,
             width: 40,
             decoration: BoxDecoration(
-              color: AppsColors.secondaryBackground,
+              color: isDark ? Colors.grey[800] : AppsColors.secondaryBackground,
               borderRadius: BorderRadius.circular(30),
             ),
             child: ClipRRect(
@@ -65,9 +83,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       File(settingsProvider.profileImagePath!),
                       fit: BoxFit.cover,
                     )
-                  : const Icon(
+                  : Icon(
                       Icons.person_outlined,
-                      color: Colors.black,
+                      color: isDark ? Colors.white : Colors.black,
                     ),
             ),
           ),
@@ -76,7 +94,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
         child: Container(
-          color: Colors.grey.shade200,
+          color: isDark ? Colors.grey[700] : Colors.grey.shade200,
           height: 1,
         ),
       ),

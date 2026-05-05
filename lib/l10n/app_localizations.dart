@@ -334,6 +334,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @this_month.
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get this_month;
+
+  /// No description provided for @last_month_inocme.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Month Income'**
+  String get last_month_inocme;
+
+  /// No description provided for @last_month_expense.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Month Expense'**
+  String get last_month_expense;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

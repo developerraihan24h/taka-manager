@@ -19,17 +19,19 @@ class _AddcategoryState extends State<Addcategory> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
           centerTitle: false,
           elevation: 5,
           title: uiHelper.CustomText(
             text: AppLocalizations.of(context)!.add_category,
             fontSize: 24,
             fontweight: FontWeight.bold,
+            context: context,
           ),
         ),
         body: Column(
@@ -40,7 +42,7 @@ class _AddcategoryState extends State<Addcategory> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TabBar(
@@ -50,7 +52,7 @@ class _AddcategoryState extends State<Addcategory> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 labelColor: Colors.white,
-                unselectedLabelColor: Colors.black54,
+                unselectedLabelColor: isDark ? Colors.white70 : Colors.black54,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs:  [
                   Tab(text: AppLocalizations.of(context)!.income),
@@ -87,6 +89,7 @@ class _AddcategoryState extends State<Addcategory> {
             fontSize: 22,
             fontfamily: "bold",
             color: AppsColors.primary,
+            context: context,
           ),
           const SizedBox(height: 15),
 
@@ -96,6 +99,7 @@ class _AddcategoryState extends State<Addcategory> {
             labelText: AppLocalizations.of(context)!.category_name,
             tohide: false,
             textinputtype: TextInputType.text,
+            context: context,
           ),
 
           const SizedBox(height: 15),
@@ -106,6 +110,7 @@ class _AddcategoryState extends State<Addcategory> {
             labelText: AppLocalizations.of(context)!.category_des,
             tohide: false,
             textinputtype: TextInputType.text,
+            context: context,
           ),
 
           const SizedBox(height: 25),
